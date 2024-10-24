@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Material+Symbols+Outlined:opsz, wght, FILL, GRAD@48,400,0,0" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            text-decoration: none;
+            list-style: none;
+            color: white;
+        }
+        .container {
+            height: 100vh;
+            background: black;
+        }
+        nav{
+            height: 10vh;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+        nav button{
+            background-color: black;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 20px;
+        }
+        nav header{
+            width: 100%;
+            text-align: center;
+        }
+        .content_frame {
+            height: 90vh;
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: auto;
+            gap: 10px;
+            padding: 10px;
+        }
+        .building{
+            border: 5px solid white;
+            height: 400px;
+            width: 300px;
+            overflow-y: hidden;
+        }
+        .btn{
+            text-decoration: none;
+            border: 5px solid white;
+            border-radius: 2px;
+            color: black;
+            background-color: white;
+            padding: 0px 5px;
+            box-shadow: 5px 5px 10px white;
+        }
+        .img{
+            width: 290px;
+            height: 390px;
+            margin: auto;
+        }
+        #img_1{
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4CjO8dpoqGI8jZCWxVOamBnglcWOqMo4RPg&s");
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition-property: all;
+            transition-duration: 1s;
+        }
+        #img_2{
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuIeDfrste-RmuUTtbJ9652DgATrm6cmiT8Q&s");
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition-property: all;
+            transition-duration: 1s;
+        }
+        #img_3{
+            background-image: url("https://media.licdn.com/dms/image/v2/D5622AQHLmelASowqeA/feedshare-shrink_800/feedshare-shrink_800/0/1721470739399?e=2147483647&v=beta&t=0i61vlw3_NbxRba6hddmn1SCmHH2Ab44bWZNzKyMiak");
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition-property: all;
+            transition-duration: 1s;
+        }
+        #img_4{
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY5vauxAG6rXE-w_s2rwqknmWhWqyj5wW3DQ&s");
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition-property: all;
+            transition-duration: 1s;
+        }
+        #building_1:hover #img_1{
+            margin: auto;
+            margin-top: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+        }
+        #building_2:hover #img_2{
+            margin: auto;
+            margin-top: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+        }
+        #building_3:hover #img_3{
+            margin: auto;
+            margin-top: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+        }
+        #building_4:hover #img_4{
+            margin: auto;
+            margin-top: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+        }
+        .btn:hover{
+            background-color: #cecece;
+            border: 5px solid #cecece;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #454545;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #868686;
+            border-radius: 5px;
+        }
+        .building h2{
+            margin: 5px 10px;
+        }
+        .building p{
+            margin: 5px 10px;
+        }
+        .building a{
+            margin: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="home page.html"><button>Back</button></a>
+            <header><h1>Building Blocks Available</h1></header>
+        </nav>
+        <div class="content_frame">
+            <div class="building" id="building_1">
+                <div class="img" id="img_1"></div>
+                <h2>Tech Park</h2>
+                <p></p>
+                <a href="#" class="btn" onclick="read_input('Tech Park')">book</a>
+            </div>
+            <div class="building" id="building_2">
+                <div class="img" id="img_2"></div>
+                <h2>University Building</h2>
+                <p></p>
+                <a href="booking page.html" class="btn" onclick="read_input('University Building')">book</a>
+            </div>
+            <div class="building" id="building_3">
+                <div class="img" id="img_3"></div>
+                <h2>Bio Tech</h2>
+                <p></p>
+                <a href="booking page.html" class="btn" onclick="read_input('Bio Tech')">book</a>
+            </div>
+            <div class="building" id="building_4">
+                <div class="img" id="img_4"></div>
+                <h2>Architecture</h2>
+                <p></p>
+                <a href="booking page.html" class="btn" onclick="read_input('Architecture')">book</a>
+            </div>
+            <div class="building"></div>
+            <div class="building"></div>
+            <div class="building"></div>
+            <div class="building"></div>
+            <div class="building"></div>
+            <div class="building"></div>
+        </div>
+    </div>
+</body>
+<script>
+    function read_input(buildingname) {
+        let credentials_deserialized = JSON.parse(localStorage.getItem("credentials"));
+
+        credentials_deserialized.build_name = buildingname;
+        
+        let credentials_serialized = JSON.stringify(credentials_deserialized);
+
+        localStorage.setItem("credentials",credentials_serialized);
+    }
+</script>
+</html>
