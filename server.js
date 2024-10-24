@@ -121,6 +121,31 @@ app.post('/api/process-timetable', async (req, res) => {
 });
 
 
+// Fetch booked events for a user API
+
+app.get('/api/user-bookings', async (req, res) => {
+    const { username } = req.query;
+
+    if (!username) {
+        return res.status(400).json({ message: 'Username is required' });
+    }
+
+    try {
+    // Find the user by username
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status (404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ bookedEvents: user.bookedEvents });
+    } catch (error) {
+        console.error('Error fetching user bookings:', error);
+        res.status (500).json({ message: 'Internal server error' });
+    }
+});
+
+
 // Book event API
 app.post('/api/book-event', async (req, res) => {
     const { username, event, seatsBooked } = req.body;
