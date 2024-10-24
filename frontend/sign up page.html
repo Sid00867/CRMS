@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(120deg, #2980b9, #8e44ad);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center {
+            width: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+            padding-bottom: 20px;
+        }
+
+        .center h1 {
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid silver;
+        }
+
+        .center .form {
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        .form .txt_field {
+            position: relative;
+            border-bottom: 2px solid #adadad;
+            margin: 30px 0;
+        }
+
+        .txt_field input {
+            width: 100%;
+            padding: 0 5px;
+            height: 40px;
+            font-size: 16px;
+            border: none;
+            background: none;
+            outline: none;
+        }
+
+        .txt_field label {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            color: #adadad;
+            transform: translateY(-50%);
+            font-size: 16px;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .txt_field span::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #2691d9;
+            transition: .5s;
+        }
+
+        .txt_field input:focus~label,
+        .txt_field input:valid~label {
+            top: -5px;
+            color: #2691d9;
+        }
+
+        .txt_field input:focus~span::before,
+        .txt_field input:valid~span::before {
+            width: 100%;
+        }
+
+        .submit {
+            width: 100%;
+            height: 50px;
+            border: 1px solid;
+            background: #2691d9;
+            border-radius: 25px;
+            font-size: 18px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .submit:hover {
+            border-color: #2691d9;
+            transition: .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <h1>StudySpot Sign Up</h1>
+        <div class="form">
+            <div class="txt_field">
+                <input class="user_name" type="text" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+            <div class="txt_field">
+                <input type="text" required>
+                <span></span>
+                <label>Email</label>
+            </div>
+            <div class="txt_field">
+                <input type="text" required>
+                <span></span>
+                <label>college</label>
+            </div>
+            <div class="txt_field">
+                <input class="password" type="password" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <a href="home page.html">
+                <button class="submit">Sign Up</button>
+            </a>
+        </div>
+    </div>
+
+</body>
+<script>
+    const username_input = document.querySelector(".user_name");
+    const password_input = document.querySelector(".password");
+    const submit = document.querySelector(".submit");
+
+    const read_input = () => {
+        const username = username_input.value;
+        const password = password_input.value;
+
+        let credentials = {
+            "username" : username,
+            "password" : password
+        }
+
+        let credentials_serialized = JSON.stringify(credentials);
+
+        localStorage.setItem("credentials",credentials_serialized);
+    }
+
+    submit.addEventListener('click', () => {
+        read_input();
+    })
+</script>
+</html>
