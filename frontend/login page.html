@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
@@ -36,12 +37,12 @@
             border-bottom: 1px solid silver;
         }
 
-        .center form {
+        .center .form {
             padding: 0 40px;
             box-sizing: border-box;
         }
 
-        form .txt_field {
+        .form .txt_field {
             position: relative;
             border-bottom: 2px solid #adadad;
             margin: 30px 0;
@@ -100,7 +101,7 @@
             text-decoration: underline;
         }
 
-        input[type="submit"] {
+        .submit {
             width: 100%;
             height: 50px;
             border: 1px solid;
@@ -113,7 +114,7 @@
             outline: none;
         }
 
-        input[type="submit"]:hover {
+        .submit:hover {
             border-color: #2691d9;
             transition: .5s;
         }
@@ -139,25 +140,49 @@
 <body>
     <div class="center">
         <h1>StudySpot Login</h1>
-        <form method="post">
+        <div class="form">
             <div class="txt_field">
-                <input type="text" required>
+                <input class="user_name" type="text" required>
                 <span></span>
                 <label>Username</label>
             </div>
             <div class="txt_field">
-                <input type="password" required>
+                <input class="password" type="password" required>
                 <span></span>
                 <label>Password</label>
             </div>
             <div class="pass">Forgot Password?</div>
-            <input type="submit" value="Login">
+            <a href="home page.html">
+                <button class="submit">Login</button>
+            </a>
             <div class="signup_link">
-                Not a member? <a href="#">Signup</a>
+                Not a member? <a href="sign up page.html">Signup</a>
             </div>
-        </form>
+        </div>
     </div>
 
 </body>
+<script>
+    const username_input = document.querySelector(".user_name");
+    const password_input = document.querySelector(".password");
+    const submit = document.querySelector(".submit");
 
+    const read_input = () => {
+        const username = username_input.value;
+        const password = password_input.value;
+
+        let credentials = {
+            "username" : username,
+            "password" : password
+        }
+
+        let credentials_serialized = JSON.stringify(credentials);
+
+        localStorage.setItem("credentials",credentials_serialized);
+    }
+
+    submit.addEventListener('click', () => {
+        read_input();
+    })
+</script>
 </html>
