@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            text-decoration: none;
+            list-style: none;
+            color: white;
+        }
+        .container {
+            height: 100vh;
+            background: black;
+        }
+        nav{
+            height: 10vh;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+        nav button{
+            background-color: black;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 20px;
+        }
+        nav header{
+            width: 100%;
+            text-align: center;
+        }
+        .frame{
+            height: 90%;
+            display: flex;
+        }
+        .slide_frame{
+            width: 300px;
+            height: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        .slide_frame .time{
+            padding: 5px 20px;
+            margin: 5px;
+            background-color: black;
+        }
+        .content_frame{
+            background-color: #150424;
+            width: 100%;
+        }
+        .content_frame button{
+            background-color: salmon;
+            padding: 5px 20px;
+            border-radius: 20px;
+            border: 2px solid black;
+            color: black;
+            font-size: 1rem;
+            margin: 20px 20px;
+            width: 200px;
+        }
+        .dialog_box{
+            position: absolute;
+            bottom: 25%;
+            left: 25%;
+            height: 300px;
+            width: 500px;
+            background-color: white;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="home page.html"><button>Back</button></a>
+            <header><h1>Booking</h1></header>
+        </nav>
+        <div class="frame">
+            <div class="slide_frame">
+                <h1>Time Slots</h1>
+                <button class="time">8:00 AM to 9:00 AM</button>
+                <button class="time">9:00 AM to 10:00 AM</button>
+                <button class="time">10:00 AM to 11:00 AM</button>
+                <button class="time">11:00 AM to 12:00 PM</button>
+                <button class="time">12:00 PM to 1:00 PM</button>
+                <button class="time">1:00 PM to 2:00 PM</button>
+                <button class="time">2:00 PM to 3:00 PM</button>
+                <button class="time">3:00 PM to 4:00 PM</button>
+                <button class="time">4:00 PM to 5:00 PM</button>
+            </div>
+            <div class="content_frame">
+                <!-- <button class="room">Room No 1</button>
+                <button class="room">Room No 2</button>
+                <button class="room">Room No 3</button>
+                <button class="room">Room No 4</button>
+                <button class="room">Room No 5</button>
+                <button class="room">Room No 6</button>
+                <button class="room">Room No 7</button>
+                <button class="room">Room No 8</button>
+                <button class="room">Room No 9</button>
+                <button class="room">Room No 10</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button>
+                <button class="room">Room No</button> -->
+     
+                    <ul class="RoomLists">
+                      <!-- <li><button onClick="alert('Button 1')">Button 1</button></li>
+                      <li><button onClick="alert('Button 2')">Button 2</button></li>
+                      <li><button onClick="alert('Button 3')">Button 3</button></li>
+                      <li><button onClick="alert('Button 4')">Button 4</button></li> -->
+                    </ul>
+                  
+            </div>
+        </div>
+        <div class="dialog_box"></div>
+    </div>
+    
+</body>
+
+<script>
+    document.getElementsByClassName("Button").disabled = true;
+</script>
+</html>
