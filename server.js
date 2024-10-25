@@ -9,7 +9,7 @@ const http = require('http');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
-const serverAPIURL = 'http://192.168.236.184:5000'
+const serverAPIURL = 'http://'
 
 // Middleware
 app.use(bodyParser.json());
