@@ -132,9 +132,15 @@
         }
 
         .content .collection span {
-            border: 5px solid white;
+            border: 1px solid white;
+            border-radius: 10px;
             height: 200px;
             width: 200px;
+            display: flex;
+            flex-direction: column;
+            padding: 0 10px;
+            gap: 10px;
+            justify-content: center;
         }
 
         ::-webkit-scrollbar {
@@ -171,7 +177,7 @@
                     <li><span class="material-symbols-outlined">calendar_month</span><a href="#">Calender</a></li>
                 </ul>
                 <div class="log_out">
-                    <button><a href="#">Log Out</a></button>
+                    <button><a href="login page.html">Log Out</a></button>
                 </div>
             </div>
         </div>
@@ -187,12 +193,23 @@
             <div class="heading university content">
                 <h2>Recently Searched</h2>
                 <div class="collection">
-                    <span></span>
+                    <span>
+                        <div class="building_name"></div>
+                        <div class="room_name"></div>
+                        <div class="seats_booked"></div>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
     </div>
 </body>
-
+<script>
+    let credentials = JSON.parse(localStorage.getItem('credentials'));
+    if(credentials.building_name != undefined){
+        document.querySelector('.building_name').innerHTML = credentials.building_name;
+        document.querySelector('.room_name').innerHTML = credentials.room_name;
+        document.querySelector('.seats_booked').innerHTML = "Seats Booked : "+credentials.seats_booked;
+    }
+</script>
 </html>
