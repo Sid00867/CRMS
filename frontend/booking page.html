@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,46 +17,60 @@
             list-style: none;
             color: white;
         }
+
         .container {
             height: 100vh;
             background: black;
         }
-        nav{
+
+        nav {
             height: 10vh;
             display: flex;
             align-items: center;
             padding: 0 20px;
         }
-        nav button{
+
+        nav button {
             background-color: black;
             padding: 10px 20px;
             border: 2px solid white;
             border-radius: 20px;
         }
-        nav header{
+
+        nav header {
             width: 100%;
             text-align: center;
         }
-        .frame{
+
+        .frame {
             height: 90%;
             display: flex;
         }
-        .slide_frame{
+
+        .slide_frame {
             width: 300px;
             height: 100%;
             padding: 20px;
             text-align: center;
         }
-        .slide_frame .time{
+
+        .slide_frame .time {
             padding: 5px 20px;
             margin: 5px;
             background-color: black;
         }
-        .content_frame{
+
+        .content_frame {
             background-color: #150424;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
         }
-        .content_frame button{
+
+        .content_frame .RoomLists button {
             background-color: salmon;
             padding: 5px 20px;
             border-radius: 20px;
@@ -65,22 +80,43 @@
             margin: 20px 20px;
             width: 200px;
         }
-        .dialog_box{
+
+        .dialog_box {
             position: absolute;
             bottom: 25%;
             left: 25%;
             height: 300px;
             width: 500px;
-            background-color: white;
+            background-color: gray;
             visibility: hidden;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .dialog_box .seat_no input {
+            color: black;
+            margin: 0px 20px;
+        }
+
+        .dialog_box button {
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 20px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <nav>
             <a href="home page.html"><button>Back</button></a>
-            <header><h1>Booking</h1></header>
+            <header>
+                <h1>Booking</h1>
+            </header>
         </nav>
         <div class="frame">
             <div class="slide_frame">
@@ -96,44 +132,121 @@
                 <button class="time">4:00 PM to 5:00 PM</button>
             </div>
             <div class="content_frame">
-                <!-- <button class="room">Room No 1</button>
-                <button class="room">Room No 2</button>
-                <button class="room">Room No 3</button>
-                <button class="room">Room No 4</button>
-                <button class="room">Room No 5</button>
-                <button class="room">Room No 6</button>
-                <button class="room">Room No 7</button>
-                <button class="room">Room No 8</button>
-                <button class="room">Room No 9</button>
-                <button class="room">Room No 10</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button>
-                <button class="room">Room No</button> -->
-     
-                    <ul class="RoomLists">
-                      <!-- <li><button onClick="alert('Button 1')">Button 1</button></li>
-                      <li><button onClick="alert('Button 2')">Button 2</button></li>
-                      <li><button onClick="alert('Button 3')">Button 3</button></li>
-                      <li><button onClick="alert('Button 4')">Button 4</button></li> -->
-                    </ul>
-                  
+                <div class="message">Please select a time slot</div>
+                <ul class="RoomLists"></ul>
             </div>
         </div>
-        <div class="dialog_box"></div>
+        <div class="dialog_box">
+            <h1>Book Event</h1>
+            <div class="avai_seats">
+                Available Seats:<span class="seat_ans"></span>
+            </div>
+            <div class="room_name">Room name:<span class="room_ans"></span></div>
+            <div class="seat_no">
+                Seat No:<input id="seat_no_ans" type="number" min="1">
+            </div>
+            <a href="home page.html"><button class="book">Book</button></a>
+        </div>
     </div>
-    
+
 </body>
 
 <script>
-    document.getElementsByClassName("Button").disabled = true;
+    const timeButtons = document.querySelectorAll('.time');
+    const contentFrame = document.querySelector('.content_frame');
+    const roomLists = document.querySelector('.RoomLists');
+    const message = document.querySelector('.message');
+
+    timeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const timeText = button.textContent;
+            const [startTime, endTime] = timeText.split(' to ').map(time => time.replace(/ (AM|PM)/,''));
+
+            const buildingName = JSON.parse(localStorage.getItem('credentials'));
+
+            console.log(buildingName.build_name);
+
+            fetch('http://192.168.178.184:5000/api/search-rooms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        buildingName: buildingName.build_name,
+                        startTime,
+                        endTime
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    roomLists.innerHTML = '';
+                    data.forEach(room => {
+                        const roomButton = document.createElement('button');
+                        roomButton.addEventListener('click', () => {
+                            document.querySelector('.dialog_box').style.visibility =
+                                'visible';
+                            document.querySelector('.seat_ans').innerHTML = room
+                                .events[0].availableSeats;
+                            document.querySelector('.room_ans').innerHTML = room
+                                .roomName;
+                            document.querySelector('#seat_no_ans').max = room
+                                .events[0].availableSeats;
+                        })
+                        roomButton.textContent = room.roomName;
+                        roomLists.appendChild(roomButton);
+                        document.querySelector('.book').addEventListener('click', () => {
+
+                            const credentials = JSON.parse(localStorage.getItem(
+                                'credentials'));
+                            credentials.seats_booked = document.querySelector('#seat_no_ans').value;
+                            credentials.room_name = room.roomName;
+                            credentials.building_name = room.buildingName;
+
+
+                            console.log(credentials.username);
+                            console.log(room.events[0]);
+                            console.log(document.querySelector('#seat_no_ans').value);
+
+
+                            fetch('http://192.168.178.184:5000/api/book-event', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        username: credentials.username,
+                                        event: room.events[0],
+                                        seatsBooked: document.querySelector('#seat_no_ans').value
+                                    })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data);
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    // alert(
+                                    //     'An error occurred. Please try again later.');
+                                });
+                                let credentials_serialized = JSON.stringify(credentials);
+                                localStorage.setItem("credentials",credentials_serialized);
+                        })
+                        
+
+                    });
+                    message.style.display = 'none';
+
+
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                });
+
+
+        });
+    });
 </script>
+
 </html>
