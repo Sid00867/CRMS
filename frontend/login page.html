@@ -152,7 +152,7 @@
                 <label>Password</label>
             </div>
             <div class="pass">Forgot Password?</div>
-            <a href="home page.html">
+            <a>
                 <button class="submit">Login</button>
             </a>
             <div class="signup_link">
@@ -167,9 +167,33 @@
     const password_input = document.querySelector(".password");
     const submit = document.querySelector(".submit");
 
+    localStorage.clear();
+
     const read_input = () => {
         const username = username_input.value;
         const password = password_input.value;
+
+        fetch('http://:5000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Login successful') {
+                // Redirect to home page
+                window.location.href = 'home page.html';
+            } else {
+                // Alert error message
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again later.');
+        });
 
         let credentials = {
             "username" : username,
@@ -178,7 +202,7 @@
 
         let credentials_serialized = JSON.stringify(credentials);
 
-        localStorage.setItem("credentials",credentials_serialized);
+        localStorage.setItem("credentials", credentials_serialized);
     }
 
     submit.addEventListener('click', () => {
